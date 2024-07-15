@@ -6,7 +6,6 @@
 }
 
 .card {
-  font-family: "Roboto Mono", sans-serif;
   width: max-content;
   width: 300px;
   height: auto;
@@ -45,9 +44,11 @@
 .form input.pass {
   margin-bottom: 5px;
 }
+.p-button {
+  width: 100%;
+}
 
 .footer_card {
-  font-family: "Poppins", sans-serif;
   font-size: 14px;
   display: flex;
   width: 100%;

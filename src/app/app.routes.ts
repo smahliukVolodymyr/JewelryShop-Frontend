@@ -10,11 +10,18 @@ export const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full',
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: 'login',
+    component: LoginComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+    ],
   },
+
+  { path: 'register', component: RegisterComponent },
+
   { path: '**', component: PageNotFoundComponent },
 ];

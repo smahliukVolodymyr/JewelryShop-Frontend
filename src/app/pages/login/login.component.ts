@@ -42,7 +42,6 @@ export class LoginComponent {
       .loginUser(`${API_URL}/auth/login`, this.userData)
       .subscribe({
         next: (response: Token) => {
-          // this.showMessage('success', 'Success', 'Login successful');
           localStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         },
@@ -51,7 +50,8 @@ export class LoginComponent {
           this.showMessage(
             'error',
             'Error',
-            'Error logging in ! (incorrect login or password)'
+            err?.message || 'Error logging in !'
+            // 'Error logging in ! (incorrect login or password)'
           );
         },
       });
