@@ -11,14 +11,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-    ],
   },
 
   { path: 'register', component: RegisterComponent },

@@ -1,0 +1,37 @@
+<form class="form" [formGroup]="authForm">
+  <input
+    name="username"
+    formControlName="username"
+    type="text"
+    placeholder="username"
+    class="username"
+    autocomplete="username"
+  />
+  <small
+    class="error-input"
+    *ngIf="username?.invalid && (username?.dirty || username?.touched)"
+    >{{ getErrorMessages("username") }}</small
+  >
+  <input
+    name="password"
+    formControlName="password"
+    type="password"
+    placeholder="password"
+    class="pass"
+    autocomplete="current-password"
+  />
+  <small
+    class="error-input"
+    *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+    >{{ getErrorMessages("password") }}</small
+  >
+  <button
+    pButton
+    label="Login"
+    type="button"
+    icon="pi pi-key"
+    [disabled]="!authForm.valid"
+    class="p-button"
+    (click)="onSubmit()"
+  ></button>
+</form>

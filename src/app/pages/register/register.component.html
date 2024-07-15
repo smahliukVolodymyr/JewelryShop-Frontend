@@ -2,34 +2,7 @@
 <div class="parent">
   <div class="card">
     <h2>Registration</h2>
-
-    <form class="form">
-      <input
-        type="text"
-        name="username"
-        [(ngModel)]="userData.username"
-        placeholder="username"
-        class="username"
-        autocomplete="username"
-      />
-      <input
-        type="password"
-        name="password"
-        [(ngModel)]="userData.password"
-        placeholder="password"
-        class="pass"
-        autocomplete="new-password"
-      />
-    </form>
-
-    <button
-      pButton
-      label="Register"
-      type="button"
-      icon="pi pi-user"
-      class="p-button"
-      (click)="onRegister()"
-    ></button>
+    <app-shared-form-component (submitForm)="onRegister($event)" />
 
     <div class="footer_card">
       <p>Have a account?</p>

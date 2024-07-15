@@ -1,47 +1,40 @@
+import { MyMessageService } from './../../services/my.message.service';
 import { ResponseMessage } from './../../../types';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { User } from '../../../types';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from 'primeng/api';
-
+import { FooterComponent } from '../../components/footer/footer.component';
+import { SharedFormComponentComponent } from '../../components/shared-form-component/shared.form.component';
 const API_URL = 'http://localhost:3000/api';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterModule, ToastModule, ButtonModule, FormsModule],
-  providers: [MessageService],
+  imports: [
+    RouterModule,
+    ToastModule,
+    FooterComponent,
+    SharedFormComponentComponent,
+  ],
+  providers: [MyMessageService, MessageService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   constructor(
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MyMessageService
   ) {}
-  userData: User = {
-    username: '',
-    password: '',
-  };
 
-  showMessage(severity: string, summary: string, detail: string) {
-    this.messageService.add({
-      severity: severity,
-      summary: summary,
-      detail: detail,
-    });
-  }
-
-  onRegister() {
+  onRegister(userData: User) {
     this.authService
-      .registerUser(`${API_URL}/auth/registration`, this.userData)
+      .registerUser(`${API_URL}/auth/registration`, userData)
       .subscribe({
         next: (response: ResponseMessage) => {
-          this.showMessage(
+          this.messageService.showMessage(
             'success',
             'Success',
             `${response.message} Now you can log in`
@@ -49,7 +42,7 @@ export class RegisterComponent {
         },
         error: (e) => {
           console.log('Error creating user:', e.message);
-          this.showMessage(
+          this.messageService.showMessage(
             'error',
             'Error',
             e?.error?.message || 'Error creating user'

@@ -2,34 +2,7 @@
 <div class="parent">
   <div class="card">
     <h2>Login</h2>
-
-    <form class="form">
-      <input
-        name="username"
-        [(ngModel)]="userData.username"
-        type="text"
-        placeholder="username"
-        class="username"
-        autocomplete="username"
-      />
-      <input
-        name="password"
-        [(ngModel)]="userData.password"
-        type="password"
-        placeholder="password"
-        class="pass"
-        autocomplete="current-password"
-      />
-    </form>
-    <button
-      pButton
-      label="Login"
-      type="button"
-      icon="pi pi-key"
-      class="p-button"
-      (click)="onLogin()"
-    ></button>
-
+    <app-shared-form-component (submitForm)="onLogin($event)" />
     <div class="footer_card">
       <p>Not a member?</p>
       <a [routerLink]="['/register']">Singn up now</a>

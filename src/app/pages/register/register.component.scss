@@ -21,32 +21,6 @@
   margin-bottom: 10px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.form input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #dddddd;
-  color: #a0a6a3;
-  box-shadow: 1px 5px 9px rgba(211, 211, 211, 0.7);
-}
-
-.form input.username {
-  margin-bottom: 15px;
-}
-
-.form input.pass {
-  margin-bottom: 5px;
-}
-.p-button {
-  width: 100%;
-}
-
 .footer_card {
   font-size: 14px;
   display: flex;
