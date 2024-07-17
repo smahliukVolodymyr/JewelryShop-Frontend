@@ -14,7 +14,7 @@
           <app-edit-popup
             icon="pi pi-plus"
             severity="success"
-            (confirm)="addElement($event)"
+            (confirm)="addMaterial($event)"
             header="Add material"
           />
         </div>
@@ -31,8 +31,8 @@
         <th style="width: 20%">Modify</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
-      <tr *ngFor="let material of materials" class="row">
+    <ng-template pTemplate="body" let-material>
+      <tr class="row">
         <td>
           {{ material.name }}
         </td>

@@ -1,0 +1,79 @@
+<p-toast />
+
+<div class="table-container">
+  <p-table
+    [value]="products"
+    [scrollable]="true"
+    scrollHeight="300px"
+    sortMode="multiple"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <h2>Products</h2>
+        <div>
+          <app-products-popup
+            icon="pi pi-plus"
+            [showDropDown]="true"
+            severity="success"
+            (confirm)="addProduct($event)"
+            header="Add product"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr class="row">
+        <th pSortableColumn="name" style="width: 20%">
+          Name <p-sortIcon field="name" />
+        </th>
+        <th pSortableColumn="type" style="width: 10%">
+          Type <p-sortIcon field="type" />
+        </th>
+        <th style="width: 20%">Materials</th>
+
+        <th pSortableColumn="weight" style="width: 15%">
+          Weight <p-sortIcon field="weight" />
+        </th>
+        <th pSortableColumn="price" style="width: 15%">
+          Price <p-sortIcon field="price" />
+        </th>
+        <th style="width: 10%">Modify</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr class="row">
+        <td>
+          {{ product.name }}
+        </td>
+        <td>
+          {{ product.type }}
+        </td>
+        <td>
+          {{ getMaterialsNames(product) }}
+        </td>
+        <td>
+          {{ product.weight }}
+        </td>
+        <td>
+          {{ product.price }}
+        </td>
+
+        <td class="button-combination">
+          <app-products-popup
+            icon="pi pi-pencil"
+            [product]="product"
+            (confirm)="editProduct($event)"
+            header="Edit product"
+          />
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-sm"
+            (click)="deleteProduct(product)"
+            severity="danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

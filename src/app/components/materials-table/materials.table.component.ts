@@ -46,7 +46,7 @@ export class MaterialsTableComponent {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          err?.message || 'Error getting materials !'
+          err?.message || 'Error getting materials!'
         );
       },
     });
@@ -66,12 +66,12 @@ export class MaterialsTableComponent {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error deleting materials !'
+          e.error.message || 'Error editing material!'
         );
       },
     });
   }
-  addElement(material: Material) {
+  addMaterial(material: Material) {
     this.materialsApiService.addMaterial(material).subscribe({
       next: () => {
         this.myMessageService.showMessage(
@@ -85,7 +85,7 @@ export class MaterialsTableComponent {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error adding materials !'
+          e.error.message || 'Error adding material!'
         );
       },
     });
@@ -105,7 +105,7 @@ export class MaterialsTableComponent {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error deleting materials !'
+          e.error.message || 'Error deleting material!'
         );
       },
     });
