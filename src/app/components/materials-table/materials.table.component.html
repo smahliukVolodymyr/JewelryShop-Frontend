@@ -1,0 +1,60 @@
+<p-toast />
+
+<div class="table-container">
+  <p-table
+    [value]="materials"
+    [scrollable]="true"
+    scrollHeight="300px"
+    sortMode="multiple"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <h2>Materials</h2>
+        <div>
+          <app-edit-popup
+            icon="pi pi-plus"
+            severity="success"
+            (confirm)="addElement($event)"
+            header="Add material"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr class="row">
+        <th pSortableColumn="name" style="width: 40%">
+          Name <p-sortIcon field="name" />
+        </th>
+        <th pSortableColumn="pricePerGram" style="width: 40%">
+          Price/1g. <p-sortIcon field="pricePerGram" />
+        </th>
+        <th style="width: 20%">Modify</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr *ngFor="let material of materials" class="row">
+        <td>
+          {{ material.name }}
+        </td>
+        <td>
+          {{ material.pricePerGram }}
+        </td>
+        <td class="button-combination">
+          <app-edit-popup
+            icon="pi pi-pencil"
+            [material]="material"
+            (confirm)="editMaterial($event)"
+            header="Edit material"
+          />
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-sm"
+            (click)="deleteMaterial(material)"
+            severity="danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

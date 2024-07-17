@@ -1,0 +1,53 @@
+<button
+  pButton
+  [icon]="icon"
+  [severity]="severity"
+  class="p-button-sm"
+  (click)="handleClick()"
+></button>
+
+<p-dialog
+  [header]="header"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+>
+  <form [formGroup]="materialForm" class="my-form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="pricePerGram">Price per gram:</label>
+      <input
+        type="number"
+        id="pricePerGram"
+        formControlName="pricePerGram"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group btn-group">
+      <button
+        pButton
+        label="Cancel"
+        class="btn"
+        severity="secondary"
+        (click)="handleClick()"
+      ></button>
+      <button
+        pButton
+        label="Confirm"
+        class="btn"
+        (click)="onConfirm()"
+        [disabled]="!materialForm.valid"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

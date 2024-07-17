@@ -1,0 +1,32 @@
+.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #fff;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.p-button-sm {
+  background-color: #3d3e44;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 1rem;
+  }
+  .logo span {
+    display: none;
+  }
+}

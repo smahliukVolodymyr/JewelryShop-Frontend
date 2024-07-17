@@ -8,7 +8,6 @@ import { AuthService } from '../../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { SharedFormComponentComponent } from '../../components/shared-form-component/shared.form.component';
-const API_URL = 'http://localhost:3000/api';
 
 @Component({
   selector: 'app-register',
@@ -30,24 +29,22 @@ export class RegisterComponent {
   ) {}
 
   onRegister(userData: User) {
-    this.authService
-      .registerUser(`${API_URL}/auth/registration`, userData)
-      .subscribe({
-        next: (response: ResponseMessage) => {
-          this.messageService.showMessage(
-            'success',
-            'Success',
-            `${response.message} Now you can log in`
-          );
-        },
-        error: (e) => {
-          console.log('Error creating user:', e.message);
-          this.messageService.showMessage(
-            'error',
-            'Error',
-            e?.error?.message || 'Error creating user'
-          );
-        },
-      });
+    this.authService.registerUser(userData).subscribe({
+      next: (response: ResponseMessage) => {
+        this.messageService.showMessage(
+          'success',
+          'Success',
+          `${response.message} Now you can log in`
+        );
+      },
+      error: (e) => {
+        console.log('Error creating user:', e.message);
+        this.messageService.showMessage(
+          'error',
+          'Error',
+          e?.error?.message || 'Error creating user'
+        );
+      },
+    });
   }
 }

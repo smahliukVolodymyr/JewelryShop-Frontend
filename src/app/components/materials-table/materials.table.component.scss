@@ -1,0 +1,37 @@
+.table-container {
+  width: 75%;
+  margin: 10px auto;
+}
+.scroll-rows {
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-header h2 {
+  margin: 0;
+}
+
+.button-combination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.row td,
+.row th {
+  padding: 8px;
+}
+.p-button-sm {
+  padding: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .table-container {
+    width: 95%;
+  }
+}
