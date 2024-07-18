@@ -38,7 +38,6 @@ export class RegisterComponent {
         );
       },
       error: (e) => {
-        console.log('Error creating user:', e.message);
         this.messageService.showMessage(
           'error',
           'Error',

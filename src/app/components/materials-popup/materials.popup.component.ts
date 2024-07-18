@@ -1,5 +1,11 @@
 import { Material } from '../../../types';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,7 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 @Component({
-  selector: 'app-edit-popup',
+  selector: 'app-materials-popup',
   standalone: true,
   imports: [
     DialogModule,
@@ -20,10 +26,10 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     InputTextModule,
   ],
-  templateUrl: './edit.popup.materials.component.html',
-  styleUrl: './edit.popup.materials.component.scss',
+  templateUrl: './materials.popup.component.html',
+  styleUrl: './materials.popup.component.scss',
 })
-export class EditPopupComponent {
+export class MaterialsPopupComponent implements OnChanges {
   @Output() confirm = new EventEmitter<Material>();
   @Input() header!: string;
   @Input() icon!: string;
@@ -62,6 +68,7 @@ export class EditPopupComponent {
       name,
       pricePerGram,
     });
+    this.materialForm.reset();
     this.handleClick();
   }
 

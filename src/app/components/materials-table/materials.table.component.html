@@ -11,7 +11,7 @@
       <div class="table-header">
         <h2>Materials</h2>
         <div>
-          <app-edit-popup
+          <app-materials-popup
             icon="pi pi-plus"
             severity="success"
             (confirm)="addMaterial($event)"
@@ -22,13 +22,13 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr class="row">
-        <th pSortableColumn="name" style="width: 40%">
+        <th pSortableColumn="name" style="width: 45%">
           Name <p-sortIcon field="name" />
         </th>
-        <th pSortableColumn="pricePerGram" style="width: 40%">
+        <th pSortableColumn="pricePerGram" style="width: 45%">
           Price/1g. <p-sortIcon field="pricePerGram" />
         </th>
-        <th style="width: 20%">Modify</th>
+        <th style="width: 15%">Modify</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-material>
@@ -40,7 +40,7 @@
           {{ material.pricePerGram }}
         </td>
         <td class="button-combination">
-          <app-edit-popup
+          <app-materials-popup
             icon="pi pi-pencil"
             [material]="material"
             (confirm)="editMaterial($event)"

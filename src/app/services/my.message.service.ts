@@ -9,9 +9,9 @@ export class MyMessageService {
 
   showMessage(severity: string, summary: string, detail: string) {
     this.messageService.add({
-      severity: severity,
-      summary: summary,
-      detail: detail,
+      severity,
+      summary,
+      detail,
     });
   }
 }

@@ -1,14 +1,14 @@
+import { Product, ResponseMessage } from './../../types';
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Product, ResponseMessage } from '../../types';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsApiService {
-  API_URL = 'http://localhost:3000/api/products';
+  private API_URL = 'http://localhost:3000/api/products';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getProducts(): Observable<Product[]> {
@@ -19,9 +19,15 @@ export class ProductsApiService {
   }
   deleteProduct(id: string): Observable<Product> {
     const headers = this.authService.generateHeader();
-    return this.http.delete<Product>(`${this.API_URL}/delete/${id}`, {
-      headers,
-    });
+    return this.http
+      .delete<Product>(`${this.API_URL}/delete/${id}`, {
+        headers,
+      })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => error);
+        })
+      );
   }
   addProduct(product: Product): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();

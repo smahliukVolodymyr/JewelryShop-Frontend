@@ -41,3 +41,17 @@ export interface Product {
   weight: number;
   price: number;
 }
+
+export interface ProductInSales {
+  _id: string;
+  name: string;
+}
+export interface SaleItem {
+  _id?: string;
+  product: string | ProductInSales;
+  saleDate?: string;
+  finalPrice: number;
+  buyerLastName: string;
+  buyerFirstName: string;
+  buyerMiddleName: string;
+}

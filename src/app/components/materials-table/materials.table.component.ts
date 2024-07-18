@@ -1,14 +1,12 @@
-import { MyMessageService } from './../../services/my.message.service';
-import { MessageService } from 'primeng/api';
+import { MaterialsService } from './../../services/materials.service';
 import { Material } from '../../../types';
 import { TableModule } from 'primeng/table';
-import { MaterialsApiService } from './../../services/materials.api.service';
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
-import { EditPopupComponent } from '../edit-popup-materials/edit.popup.materials.component';
+import { MaterialsPopupComponent } from '../materials-popup/materials.popup.component';
 
 @Component({
   selector: 'app-materials-table',
@@ -19,17 +17,14 @@ import { EditPopupComponent } from '../edit-popup-materials/edit.popup.materials
     ToastModule,
     CommonModule,
     PaginatorModule,
-    EditPopupComponent,
+    MaterialsPopupComponent,
   ],
-  providers: [MyMessageService, MessageService],
+  providers: [MaterialsService],
   templateUrl: './materials.table.component.html',
   styleUrl: './materials.table.component.scss',
 })
 export class MaterialsTableComponent {
-  constructor(
-    private materialsApiService: MaterialsApiService,
-    private myMessageService: MyMessageService
-  ) {}
+  constructor(private materialsService: MaterialsService) {}
 
   materials: Material[] = [];
 
@@ -38,76 +33,20 @@ export class MaterialsTableComponent {
   }
 
   getMaterials() {
-    this.materialsApiService.getMaterials().subscribe({
-      next: (response: Material[]) => {
-        this.materials = response;
-      },
-      error: (err) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          err?.message || 'Error getting materials!'
-        );
-      },
-    });
+    this.materialsService.materials$.subscribe(
+      (response) => (this.materials = response)
+    );
+    this.materialsService.getMaterials();
   }
-
   editMaterial(material: Material) {
-    this.materialsApiService.editMaterial(material).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'Material data changed'
-        );
-        this.getMaterials();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error editing material!'
-        );
-      },
-    });
+    this.materialsService.editMaterial(material);
   }
   addMaterial(material: Material) {
-    this.materialsApiService.addMaterial(material).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'New material was created'
-        );
-        this.getMaterials();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error adding material!'
-        );
-      },
-    });
+    this.materialsService.addMaterial(material);
   }
 
   deleteMaterial(material: Material) {
-    this.materialsApiService.deleteMaterial(material._id!).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'Material was deleted'
-        );
-        this.getMaterials();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error deleting material!'
-        );
-      },
-    });
+    const id = material._id;
+    this.materialsService.deleteMaterial(id!);
   }
 }

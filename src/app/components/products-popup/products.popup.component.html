@@ -30,15 +30,6 @@
         placeholder="Select a Type"
       />
     </div>
-    <div class="form-group" *ngIf="showDropDown">
-      <p-multiSelect
-        formControlName="materials"
-        [options]="materials"
-        optionLabel="type"
-        placeholder="Select Products"
-      />
-    </div>
-
     <div class="form-group">
       <label for="weight">Weight:</label>
       <input
@@ -55,6 +46,14 @@
         id="price"
         formControlName="price"
         class="form-control"
+      />
+    </div>
+    <div class="form-group" *ngIf="showDropDown">
+      <p-multiSelect
+        formControlName="materials"
+        [options]="materials"
+        optionLabel="type"
+        placeholder="Select Products"
       />
     </div>
 

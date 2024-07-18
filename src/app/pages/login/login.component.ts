@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Token, User } from '../../../types';
+import { User } from '../../../types';
 import { AuthService } from '../../services/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
@@ -35,7 +35,6 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.log(err);
         this.messageService.showMessage(
           'error',
           'Error',

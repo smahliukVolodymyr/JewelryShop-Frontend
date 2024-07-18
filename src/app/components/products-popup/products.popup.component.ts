@@ -1,4 +1,5 @@
-import { MaterialsApiService } from './../../services/materials.api.service';
+import { MaterialsService } from './../../services/materials.service';
+import { MaterialsApiService } from '../../services/materials.api.service';
 import {
   FormBuilder,
   FormGroup,
@@ -6,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Product, Material, dropDownSelector } from './../../../types';
+import { Product, Material, dropDownSelector } from '../../../types';
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -26,8 +27,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     CommonModule,
     MultiSelectModule,
   ],
-  templateUrl: './products-popup.component.html',
-  styleUrl: './products-popup.component.scss',
+  templateUrl: './products.popup.component.html',
+  styleUrl: './products.popup.component.scss',
 })
 export class ProductsPopupComponent implements OnInit {
   @Output() confirm = new EventEmitter<Product>();
@@ -48,21 +49,20 @@ export class ProductsPopupComponent implements OnInit {
 
   ngOnInit() {
     if (this.showDropDown) {
-      this.materialsApiService
-        .getMaterials()
-        .subscribe((response: Material[]) => {
-          response.map((material) => {
-            this.materials.push({
-              type: material.name,
-              value: material._id!,
-            });
+      this.materialsService.materials$.subscribe((response: Material[]) => {
+        response.map((material) => {
+          this.materials.push({
+            type: material.name,
+            value: material._id!,
           });
         });
+      });
+      this.materialsService.getMaterials();
     }
   }
   constructor(
     private formBuilder: FormBuilder,
-    private materialsApiService: MaterialsApiService
+    private materialsService: MaterialsService
   ) {}
 
   types: dropDownSelector[] = [
@@ -109,6 +109,7 @@ export class ProductsPopupComponent implements OnInit {
       price,
       weight,
     });
+    this.productForm.reset();
     this.handleClick();
   }
 

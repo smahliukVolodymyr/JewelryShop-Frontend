@@ -1,0 +1,72 @@
+<p-toast />
+
+<div class="table-container">
+  <p-table
+    [value]="sales"
+    [scrollable]="true"
+    scrollHeight="300px"
+    sortMode="multiple"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <h2>Sales</h2>
+        <div>
+          <app-sales-popup
+            icon="pi pi-plus"
+            [showProductSelector]="true"
+            severity="success"
+            (confirm)="addSaleItem($event)"
+            header="Add Sales Item"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr class="row">
+        <th pSortableColumn="product.name" style="width: 25%">
+          Product <p-sortIcon field="product" />
+        </th>
+        <th pSortableColumn="finalPrice" style="width: 20%">
+          Price <p-sortIcon field="finalPrice" />
+        </th>
+        <th pSortableColumn="price" style="width: 20%">
+          Buyer <p-sortIcon field="price" />
+        </th>
+        <th pSortableColumn="saleDate" style="width: 20%">
+          Sale Date <p-sortIcon field="saleDate" />
+        </th>
+        <th style="width: 10%">Modify</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-saleItem>
+      <tr class="row">
+        <td>{{ saleItem.product.name }}</td>
+        <td>
+          {{ saleItem.finalPrice }}
+        </td>
+        <td>
+          {{ formFullName(saleItem) }}
+        </td>
+        <td>
+          {{ saleItem.saleDate | date : "short" }}
+        </td>
+
+        <td class="button-combination">
+          <app-sales-popup
+            icon="pi pi-pencil"
+            [saleItem]="saleItem"
+            (confirm)="editSaleItem($event)"
+            header="Edit sale item"
+          />
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-sm"
+            (click)="deleteSaleItem(saleItem)"
+            severity="danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

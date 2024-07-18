@@ -1,14 +1,14 @@
+import { MyMessageService } from './../../services/my.message.service';
+import { ProductsApiService } from './../../services/products.api.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
-import { MessageService } from 'primeng/api';
-import { MyMessageService } from './../../services/my.message.service';
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { ProductsApiService } from '../../services/products.api.service';
 import { Product } from '../../../types';
-import { ProductsPopupComponent } from '../products-popup/products-popup.component';
+import { ProductsPopupComponent } from '../products-popup/products.popup.component';
+import { ProductsService } from '../../services/products.service';
 @Component({
   selector: 'app-products-table',
   standalone: true,
@@ -20,20 +20,20 @@ import { ProductsPopupComponent } from '../products-popup/products-popup.compone
     ProductsPopupComponent,
     PaginatorModule,
   ],
-  providers: [MyMessageService, MessageService],
+  providers: [ProductsService],
   templateUrl: './products.table.component.html',
   styleUrl: './products.table.component.scss',
 })
 export class ProductsTableComponent {
-  constructor(
-    private productsApiService: ProductsApiService,
-    private myMessageService: MyMessageService
-  ) {}
+  constructor(private productsService: ProductsService) {}
 
   products: Product[] = [];
 
   ngOnInit() {
-    this.getProducts();
+    this.productsService.products$.subscribe(
+      (response) => (this.products = response)
+    );
+    this.productsService.getProducts();
   }
 
   getMaterialsNames(product: Product): string {
@@ -47,76 +47,15 @@ export class ProductsTableComponent {
       .join(', ');
   }
 
-  getProducts() {
-    this.productsApiService.getProducts().subscribe({
-      next: (response: Product[]) => {
-        this.products = response;
-      },
-      error: (err) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          err?.message || 'Error getting products!'
-        );
-      },
-    });
+  deleteProduct(product: Product) {
+    this.productsService.deleteProduct(product._id!);
   }
 
-  deleteProduct(product: Product) {
-    this.productsApiService.deleteProduct(product._id!).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'Product was deleted'
-        );
-        this.getProducts();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error deleting product!'
-        );
-      },
-    });
-  }
   editProduct(product: Product) {
-    this.productsApiService.editProduct(product).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'Product data was changed'
-        );
-        this.getProducts();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error editing product!'
-        );
-      },
-    });
+    this.productsService.editProduct(product);
   }
+
   addProduct(product: Product) {
-    this.productsApiService.addProduct(product).subscribe({
-      next: () => {
-        this.myMessageService.showMessage(
-          'success',
-          'Success',
-          'New product was created'
-        );
-        this.getProducts();
-      },
-      error: (e) => {
-        this.myMessageService.showMessage(
-          'error',
-          'Error',
-          e.error.message || 'Error adding product!'
-        );
-      },
-    });
+    this.productsService.addProduct(product);
   }
 }

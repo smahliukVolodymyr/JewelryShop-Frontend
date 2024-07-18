@@ -10,7 +10,6 @@ body {
   margin: 0;
   // font-family: "Roboto Mono", sans-serif;
   font-family: "Poppins", sans-serif;
-  // background-color: #3d3e44;
   background-color: #50b498;
 }
 
@@ -18,4 +17,43 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.scroll-rows {
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-header h2 {
+  margin: 0;
+}
+
+.p-button-sm {
+  padding: 8px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.button-combination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.row td,
+.row th {
+  padding: 8px;
 }
