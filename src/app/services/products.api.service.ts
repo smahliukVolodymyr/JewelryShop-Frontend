@@ -1,8 +1,8 @@
 import { Product, ResponseMessage } from './../../types';
 import { AuthService } from './auth.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -21,15 +21,12 @@ export class ProductsApiService {
   }
   deleteProduct(id: string): Observable<Product> {
     const headers = this.authService.generateHeader();
-    return this.http
-      .delete<Product>(`${this.API_URL + this.API_PATH}/delete/${id}`, {
+    return this.http.delete<Product>(
+      `${this.API_URL + this.API_PATH}/delete/${id}`,
+      {
         headers,
-      })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => error);
-        })
-      );
+      }
+    );
   }
   addProduct(product: Product): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();
