@@ -2,7 +2,14 @@ import { SalesService } from './../../services/sales.service';
 import { ProductsService } from './../../services/products.service';
 import { ButtonModule } from 'primeng/button';
 import { dropDownSelector, SaleItem } from './../../../types';
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Output,
+  Input,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -25,7 +32,7 @@ import { DropdownModule } from 'primeng/dropdown';
   templateUrl: './sales.popup.component.html',
   styleUrl: './sales.popup.component.scss',
 })
-export class SalesPopupComponent {
+export class SalesPopupComponent implements OnInit, OnChanges {
   @Output() confirm = new EventEmitter<SaleItem>();
   @Input() header!: string;
   @Input() icon!: string;

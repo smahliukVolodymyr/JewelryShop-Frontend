@@ -8,8 +8,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProductsService {
-  private productsSubject = new BehaviorSubject<Product[]>([]);
-  products$ = this.productsSubject.asObservable();
+  private readonly productsSubject = new BehaviorSubject<Product[]>([]);
+  readonly products$ = this.productsSubject.asObservable();
 
   constructor(
     private productsApiService: ProductsApiService,

@@ -8,7 +8,7 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductsApiService {
-  private API_URL = 'http://localhost:3000/api/products';
+  private readonly API_URL = 'http://localhost:3000/api/products';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getProducts(): Observable<Product[]> {

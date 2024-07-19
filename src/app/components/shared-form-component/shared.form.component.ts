@@ -21,7 +21,7 @@ export class SharedFormComponentComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  validators = [
+  private validators = [
     Validators.required,
     Validators.minLength(4),
     Validators.pattern('^[a-zA-Z0-9]+$'),

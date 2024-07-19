@@ -1,5 +1,4 @@
 import { MyMessageService } from './my.message.service';
-import { ProductsApiService } from './products.api.service';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SaleItem } from '../../types';
@@ -9,8 +8,8 @@ import { SalesApiService } from './sales.api.service';
   providedIn: 'root',
 })
 export class SalesService {
-  private salesSubject = new BehaviorSubject<SaleItem[]>([]);
-  sales$ = this.salesSubject.asObservable();
+  private readonly salesSubject = new BehaviorSubject<SaleItem[]>([]);
+  readonly sales$ = this.salesSubject.asObservable();
 
   constructor(
     private salesApiService: SalesApiService,

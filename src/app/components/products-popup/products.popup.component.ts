@@ -8,7 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Product, Material, dropDownSelector } from '../../../types';
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -30,7 +37,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
   templateUrl: './products.popup.component.html',
   styleUrl: './products.popup.component.scss',
 })
-export class ProductsPopupComponent implements OnInit {
+export class ProductsPopupComponent implements OnInit, OnChanges {
   @Output() confirm = new EventEmitter<Product>();
   @Input() header!: string;
   @Input() icon!: string;

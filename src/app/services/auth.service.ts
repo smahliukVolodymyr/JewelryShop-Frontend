@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseMessage, Token, User } from '../../types';
 import { map } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  API_URL = 'http://localhost:3000/api/auth';
-  tokenKey = 'token';
+  private readonly API_URL = 'http://localhost:3000/api/auth';
+  private readonly tokenKey = 'token';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   loginUser(body: User): Observable<Token> {
     return this.http.post<Token>(`${this.API_URL}/login`, body).pipe(
@@ -31,17 +32,30 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.tokenKey);
+    this.cookieService.delete(this.tokenKey, '/');
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    const expiryDate = new Date();
+    expiryDate.setHours(expiryDate.getHours() + 8);
+    this.cookieService.set(
+      this.tokenKey,
+      token,
+      expiryDate,
+      '/',
+      '',
+      true,
+      'Strict'
+    );
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.cookieService.get(this.tokenKey);
   }
 
+  isLogedIn(): boolean {
+    return this.cookieService.check(this.tokenKey);
+  }
   generateHeader(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders({

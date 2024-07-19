@@ -8,7 +8,7 @@ import { ResponseMessage, SaleItem } from '../../types';
   providedIn: 'root',
 })
 export class SalesApiService {
-  private API_URL = 'http://localhost:3000/api/sales';
+  private readonly API_URL = 'http://localhost:3000/api/sales';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getSales(): Observable<SaleItem[]> {

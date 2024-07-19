@@ -43,19 +43,19 @@
     <ng-template pTemplate="body" let-product>
       <tr class="row">
         <td>
-          {{ product.name }}
+          {{ product.name | lengthModifier : 18 }}
         </td>
         <td>
           {{ product.type }}
         </td>
         <td>
-          {{ getMaterialsNames(product) }}
+          {{ getMaterialsNames(product) | lengthModifier : 35 }}
         </td>
         <td>
-          {{ product.weight }}
+          {{ product.weight | metricAdder }}
         </td>
         <td>
-          {{ product.price }}
+          {{ product.price | customCurrency }}
         </td>
 
         <td class="button-combination">

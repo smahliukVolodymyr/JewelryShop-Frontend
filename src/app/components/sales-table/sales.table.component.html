@@ -40,9 +40,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-saleItem>
       <tr class="row">
-        <td>{{ saleItem.product.name }}</td>
+        <td>{{ saleItem.product.name | lengthModifier : 18 }}</td>
         <td>
-          {{ saleItem.finalPrice }}
+          {{ saleItem.finalPrice | customCurrency }}
         </td>
         <td>
           {{ formFullName(saleItem) }}

@@ -8,8 +8,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class MaterialsService {
-  private materialsSubject = new BehaviorSubject<Material[]>([]);
-  materials$ = this.materialsSubject.asObservable();
+  private readonly materialsSubject = new BehaviorSubject<Material[]>([]);
+  readonly materials$ = this.materialsSubject.asObservable();
 
   constructor(
     private materialsApiService: MaterialsApiService,

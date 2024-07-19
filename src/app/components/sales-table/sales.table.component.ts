@@ -1,12 +1,14 @@
 import { SaleItem } from './../../../types';
 import { ButtonModule } from 'primeng/button';
 import { SalesService } from './../../services/sales.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { SalesPopupComponent } from '../sales-popup/sales.popup.component';
+import { CustomCurrencyPipe } from '../../pipes/custom-currency.pipe';
+import { LengthModifierPipe } from '../../pipes/length-modifier.pipe';
 
 @Component({
   selector: 'app-sales-table',
@@ -17,13 +19,15 @@ import { SalesPopupComponent } from '../sales-popup/sales.popup.component';
     ToastModule,
     CommonModule,
     PaginatorModule,
+    CustomCurrencyPipe,
+    LengthModifierPipe,
     SalesPopupComponent,
   ],
   providers: [SalesService],
   templateUrl: './sales.table.component.html',
   styleUrl: './sales.table.component.scss',
 })
-export class SalesTableComponent {
+export class SalesTableComponent implements OnInit {
   constructor(private salesService: SalesService) {}
 
   sales: SaleItem[] = [];

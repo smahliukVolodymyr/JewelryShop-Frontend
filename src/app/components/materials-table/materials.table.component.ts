@@ -1,13 +1,13 @@
 import { MaterialsService } from './../../services/materials.service';
 import { Material } from '../../../types';
 import { TableModule } from 'primeng/table';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { MaterialsPopupComponent } from '../materials-popup/materials.popup.component';
-
+import { CustomCurrencyPipe } from '../../pipes/custom-currency.pipe';
 @Component({
   selector: 'app-materials-table',
   standalone: true,
@@ -18,12 +18,13 @@ import { MaterialsPopupComponent } from '../materials-popup/materials.popup.comp
     CommonModule,
     PaginatorModule,
     MaterialsPopupComponent,
+    CustomCurrencyPipe,
   ],
   providers: [MaterialsService],
   templateUrl: './materials.table.component.html',
   styleUrl: './materials.table.component.scss',
 })
-export class MaterialsTableComponent {
+export class MaterialsTableComponent implements OnInit {
   constructor(private materialsService: MaterialsService) {}
 
   materials: Material[] = [];

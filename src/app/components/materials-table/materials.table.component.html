@@ -37,7 +37,7 @@
           {{ material.name }}
         </td>
         <td>
-          {{ material.pricePerGram }}
+          {{ material.pricePerGram | customCurrency  }}
         </td>
         <td class="button-combination">
           <app-materials-popup
