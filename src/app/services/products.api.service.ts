@@ -3,24 +3,26 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsApiService {
-  private readonly API_URL = 'http://localhost:3000/api/products';
+  private readonly API_URL = environment.apiUrl;
+  private readonly API_PATH = environment.productPath;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getProducts(): Observable<Product[]> {
     const headers = this.authService.generateHeader();
-    return this.http.get<Product[]>(`${this.API_URL}/get`, {
+    return this.http.get<Product[]>(`${this.API_URL + this.API_PATH}/get`, {
       headers,
     });
   }
   deleteProduct(id: string): Observable<Product> {
     const headers = this.authService.generateHeader();
     return this.http
-      .delete<Product>(`${this.API_URL}/delete/${id}`, {
+      .delete<Product>(`${this.API_URL + this.API_PATH}/delete/${id}`, {
         headers,
       })
       .pipe(
@@ -31,14 +33,22 @@ export class ProductsApiService {
   }
   addProduct(product: Product): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();
-    return this.http.post<ResponseMessage>(`${this.API_URL}/add`, product, {
-      headers,
-    });
+    return this.http.post<ResponseMessage>(
+      `${this.API_URL + this.API_PATH}/add`,
+      product,
+      {
+        headers,
+      }
+    );
   }
   editProduct(product: Product): Observable<Product> {
     const headers = this.authService.generateHeader();
-    return this.http.put<Product>(`${this.API_URL}/edit/`, product, {
-      headers,
-    });
+    return this.http.put<Product>(
+      `${this.API_URL + this.API_PATH}/edit/`,
+      product,
+      {
+        headers,
+      }
+    );
   }
 }
