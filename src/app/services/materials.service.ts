@@ -21,11 +21,11 @@ export class MaterialsService {
       next: (response: Material[]) => {
         this.materialsSubject.next(response);
       },
-      error: (err) => {
+      error: (e) => {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          err?.message || 'Error getting materials!'
+          e.error?.message || 'Error getting materials!'
         );
       },
     });
@@ -45,7 +45,7 @@ export class MaterialsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error editing material!'
+          e.error?.message || 'Error editing material!'
         );
       },
     });
@@ -64,7 +64,7 @@ export class MaterialsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error adding material!'
+          e.error?.message || 'Error adding material!'
         );
       },
     });
@@ -83,7 +83,7 @@ export class MaterialsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error deleting material!'
+          e.error?.message || 'Error deleting material!'
         );
       },
     });

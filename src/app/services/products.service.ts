@@ -21,11 +21,11 @@ export class ProductsService {
       next: (response: Product[]) => {
         this.productsSubject.next(response);
       },
-      error: (err) => {
+      error: (e) => {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          err?.message || 'Error getting products!'
+          e.error?.message || 'Error getting products!'
         );
       },
     });
@@ -45,7 +45,7 @@ export class ProductsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error deleting product!'
+          e.error?.message || 'Error deleting product!'
         );
       },
     });
@@ -64,7 +64,7 @@ export class ProductsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error editing product!'
+          e.error?.message || 'Error editing product!'
         );
       },
     });
@@ -83,7 +83,7 @@ export class ProductsService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error adding product!'
+          e.error?.message || 'Error adding product!'
         );
       },
     });

@@ -21,11 +21,11 @@ export class SalesService {
       next: (response: SaleItem[]) => {
         this.salesSubject.next(response);
       },
-      error: (err) => {
+      error: (e) => {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          err?.message || 'Error getting sales!'
+          e.error?.message || 'Error getting sales!'
         );
       },
     });
@@ -45,7 +45,7 @@ export class SalesService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error deleting sale item!'
+          e.error?.message || 'Error deleting sale item!'
         );
       },
     });
@@ -64,7 +64,7 @@ export class SalesService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error editing sale item!'
+          e.error?.message || 'Error editing sale item!'
         );
       },
     });
@@ -83,7 +83,7 @@ export class SalesService {
         this.myMessageService.showMessage(
           'error',
           'Error',
-          e.error.message || 'Error adding sale item!'
+          e.error?.message || 'Error adding sale item!'
         );
       },
     });

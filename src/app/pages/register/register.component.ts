@@ -41,7 +41,7 @@ export class RegisterComponent {
         this.messageService.showMessage(
           'error',
           'Error',
-          e?.error?.message || 'Error creating user'
+          e.error?.message || 'Error creating user'
         );
       },
     });

@@ -34,11 +34,11 @@ export class LoginComponent {
       next: () => {
         this.router.navigate(['/home']);
       },
-      error: (err) => {
+      error: (e) => {
         this.messageService.showMessage(
           'error',
           'Error',
-          err?.message || 'Error logging in !'
+          e.error?.message || 'Error logging in !'
         );
       },
     });
