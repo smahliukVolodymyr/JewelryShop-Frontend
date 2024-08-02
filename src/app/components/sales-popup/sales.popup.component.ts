@@ -30,7 +30,6 @@ import { DropdownModule } from 'primeng/dropdown';
     DropdownModule,
   ],
   templateUrl: './sales.popup.component.html',
-  styleUrl: './sales.popup.component.scss',
 })
 export class SalesPopupComponent implements OnInit, OnChanges {
   @Output() confirm = new EventEmitter<SaleItem>();
@@ -68,6 +67,7 @@ export class SalesPopupComponent implements OnInit, OnChanges {
     Validators.maxLength(15),
     Validators.pattern('^[a-zA-Z0-9 ]+$'),
   ];
+
   salesForm: FormGroup = this.formBuilder.group({
     product: [, [Validators.required]],
     finalPrice: [0],

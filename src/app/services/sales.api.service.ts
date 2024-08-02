@@ -15,23 +15,21 @@ export class SalesApiService {
 
   getSales(): Observable<SaleItem[]> {
     const headers = this.authService.generateHeader();
-    return this.http.get<SaleItem[]>(`${this.API_URL + this.API_PATH}/get`, {
+    return this.http.get<SaleItem[]>(`${this.API_URL + this.API_PATH}`, {
       headers,
     });
   }
 
   editSaleleItem(item: SaleItem): Observable<SaleItem> {
     const headers = this.authService.generateHeader();
-    return this.http.put<SaleItem>(
-      `${this.API_URL + this.API_PATH}/edit`,
-      item,
-      { headers }
-    );
+    return this.http.put<SaleItem>(`${this.API_URL + this.API_PATH}`, item, {
+      headers,
+    });
   }
   addSaleItem(item: SaleItem): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();
     return this.http.post<ResponseMessage>(
-      `${this.API_URL + this.API_PATH}/add`,
+      `${this.API_URL + this.API_PATH}`,
       item,
       {
         headers,
@@ -40,11 +38,8 @@ export class SalesApiService {
   }
   deleteSaleItem(id: string): Observable<SaleItem> {
     const headers = this.authService.generateHeader();
-    return this.http.delete<SaleItem>(
-      `${this.API_URL + this.API_PATH}/delete/${id}`,
-      {
-        headers,
-      }
-    );
+    return this.http.delete<SaleItem>(`${this.API_URL + this.API_PATH}/${id}`, {
+      headers,
+    });
   }
 }

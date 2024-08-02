@@ -22,7 +22,6 @@ import { CustomCurrencyPipe } from '../../pipes/custom-currency.pipe';
   ],
   providers: [MaterialsService],
   templateUrl: './materials.table.component.html',
-  styleUrl: './materials.table.component.scss',
 })
 export class MaterialsTableComponent implements OnInit {
   constructor(private materialsService: MaterialsService) {}

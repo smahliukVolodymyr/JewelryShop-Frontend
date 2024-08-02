@@ -16,24 +16,21 @@ export class MaterialsApiService {
 
   getMaterials(): Observable<Material[]> {
     const headers = this.authService.generateHeader();
-    return this.http.get<Material[]>(`${this.API_URL + this.API_PATH}/get`, {
+    return this.http.get<Material[]>(`${this.API_URL + this.API_PATH}`, {
       headers,
     });
   }
 
   deleteMaterial(id: string): Observable<Material> {
     const headers = this.authService.generateHeader();
-    return this.http.delete<Material>(
-      `${this.API_URL + this.API_PATH}/delete/${id}`,
-      {
-        headers,
-      }
-    );
+    return this.http.delete<Material>(`${this.API_URL + this.API_PATH}/${id}`, {
+      headers,
+    });
   }
   addMaterial(material: Material): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();
     return this.http.post<ResponseMessage>(
-      `${this.API_URL + this.API_PATH}/add`,
+      `${this.API_URL + this.API_PATH}`,
       material,
       {
         headers,
@@ -43,7 +40,7 @@ export class MaterialsApiService {
   editMaterial(material: Material): Observable<Material> {
     const headers = this.authService.generateHeader();
     return this.http.put<Material>(
-      `${this.API_URL + this.API_PATH}/edit`,
+      `${this.API_URL + this.API_PATH}`,
       material,
       {
         headers,

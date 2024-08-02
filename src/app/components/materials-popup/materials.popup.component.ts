@@ -27,7 +27,6 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
   ],
   templateUrl: './materials.popup.component.html',
-  styleUrl: './materials.popup.component.scss',
 })
 export class MaterialsPopupComponent implements OnChanges {
   @Output() confirm = new EventEmitter<Material>();

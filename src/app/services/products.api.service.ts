@@ -15,23 +15,20 @@ export class ProductsApiService {
 
   getProducts(): Observable<Product[]> {
     const headers = this.authService.generateHeader();
-    return this.http.get<Product[]>(`${this.API_URL + this.API_PATH}/get`, {
+    return this.http.get<Product[]>(`${this.API_URL + this.API_PATH}`, {
       headers,
     });
   }
   deleteProduct(id: string): Observable<Product> {
     const headers = this.authService.generateHeader();
-    return this.http.delete<Product>(
-      `${this.API_URL + this.API_PATH}/delete/${id}`,
-      {
-        headers,
-      }
-    );
+    return this.http.delete<Product>(`${this.API_URL + this.API_PATH}/${id}`, {
+      headers,
+    });
   }
   addProduct(product: Product): Observable<ResponseMessage> {
     const headers = this.authService.generateHeader();
     return this.http.post<ResponseMessage>(
-      `${this.API_URL + this.API_PATH}/add`,
+      `${this.API_URL + this.API_PATH}`,
       product,
       {
         headers,
@@ -40,12 +37,8 @@ export class ProductsApiService {
   }
   editProduct(product: Product): Observable<Product> {
     const headers = this.authService.generateHeader();
-    return this.http.put<Product>(
-      `${this.API_URL + this.API_PATH}/edit/`,
-      product,
-      {
-        headers,
-      }
-    );
+    return this.http.put<Product>(`${this.API_URL + this.API_PATH}`, product, {
+      headers,
+    });
   }
 }
